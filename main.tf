@@ -2,6 +2,20 @@ provider "aws" {
   region = "us-east-1"  
 }
 
+resource "aws_iam_group" "cloud_engineer_group" {
+  name = "CloudEngineerGroup"
+}
+
+resource "aws_iam_user" "cloud_engineer_user" {
+  name = "CloudEngineerUser"
+}
+
+resource "aws_iam_group_membership" "cloud_engineer_membership" {
+  name = aws_iam_user.cloud_engineer_user.name
+  users = [aws_iam_user.cloud_engineer_user.name]
+  group = aws_iam_group.cloud_engineer_group.name
+}
+
 resource "aws_iam_role" "cloud_engineer_role" {
   name = "CloudEngineerRole"
 
@@ -48,4 +62,5 @@ resource "aws_iam_policy_attachment" "cloud_engineer_policy_attachment" {
   name       = "CloudEngineerPolicyAttachment"
   policy_arn = aws_iam_policy.cloud_engineer_policy.arn
   roles      = [aws_iam_role.cloud_engineer_role.name]
+  groups     = [aws_iam_group.cloud_engineer_group.name]
 }

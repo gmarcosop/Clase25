@@ -40,7 +40,7 @@ resource "aws_iam_policy" "cloud_engineer_policy" {
         Effect = "Deny",
         Resource = "*"
       }
-    ]
+    ] 
   })
 }
 

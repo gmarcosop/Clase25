@@ -29,7 +29,8 @@ resource "aws_iam_policy" "cloud_engineer_policy" {
         Action = [
           "ec2:Describe*",
           "ec2:Start*",
-          "ec2:Stop*"
+          "ec2:Stop*",
+          "ec2:RebootInstances"
         ],
         Effect = "Allow",
         Resource = "*"
